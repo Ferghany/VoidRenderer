@@ -15,5 +15,5 @@ void main() {
     d = abs(d);
     d = smoothstep(0.0, 0.05, d);
     // d = step(0.05, abs(d - 0.5));
-    gl_FragColor = vec4(d, 1.0, 1.0, 1.0);
+    gl_FragColor = vec4(d, 1.0, d, 1.0);
 }
