@@ -22,11 +22,11 @@ void main() {
     for(float i = 0.0; i < 4.0; i++) {
         uv = fract(uv * 1.5) - 0.5;
 
-        float d = length(uv) * exp(-length(uv0));
-        vec3 col = pallete(length(uv0) + i * .4 + u_time * .4);
+        float d = pow(length(uv), 0.5) * exp(-2.0 * length(uv0));
+        vec3 col = pallete(length(uv0) + i * .5 + u_time * .5);
 
         d = abs(sin(d * 8.0 + u_time) / 8.0);
-        d = pow(0.01 / d, 1.1);
+        d = pow(0.005 / d, 1.1);
 
     // d = smoothstep(0.0, 0.05, d);
     // d = step(0.05, abs(d - 0.5));
