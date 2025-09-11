@@ -21,9 +21,10 @@ void main() {
   float mask = circle(uv, vec2(0.0, 0.0), .4, 0.05);
   mask -= circle(uv, vec2(-.15, 0.16), .075, 0.01);
   mask -= circle(uv, vec2(.12, 0.16), .075, 0.01);
+  mask -= circle(uv, vec2(.0, 0.0), .015, 0.01);
 
-  float mouth = circle(uv, vec2(0.0, 0.0), .045, 0.01);
-  mouth -= circle(uv, vec2(0.0, 0.025), .05, 0.01);
+  float mouth = circle(uv, vec2(0.0, -0.075), .045, 0.01);
+  mouth -= circle(uv, vec2(0.0, -0.05), .05, 0.01);
   // vec3 col = vec3(mouth);
   mouth = step(0.5, mouth);
   mask -= mouth;
