@@ -1,11 +1,3 @@
-#ifdef GL_ES
-precision mediump float;
-#endif
-
-uniform vec2 u_resolution;
-uniform vec2 u_mouse;
-uniform float u_time;
-
 float circle(vec2 uv, vec2 p, float r, float blur) {
   float d = length(uv - p);
   float c = smoothstep(r, r - blur, d);
@@ -13,12 +5,12 @@ float circle(vec2 uv, vec2 p, float r, float blur) {
   return c;
 }
 
-void main() {
-  vec2 uv = (gl_FragCoord.xy / u_resolution.xy) * 2.0 - 1.0;
-  uv.x *= u_resolution.x / u_resolution.y;
+void mainImage(out vec4 fragColor, in vec2 fragCoord) {
+  vec2 uv = (fragCoord.xy / iResolution.xy) * 2.0 - 1.0;
+  uv.x *= iResolution.x / iResolution.y;
   // vec2 uv = (gl_FragCoord.xy * 2.0 - u_resolution) / u_resolution.y;
 
-  float mask = circle(uv, vec2(0.0, 0.0), .4, 0.05);
+  float mask = circle(uv, vec2(0.0, 0.0), .4, 0.015);
   mask -= circle(uv, vec2(-.15, 0.16), .075, 0.01);
   mask -= circle(uv, vec2(.12, 0.16), .075, 0.01);
   mask -= circle(uv, vec2(.0, 0.0), .015, 0.01);
@@ -28,9 +20,9 @@ void main() {
   // vec3 col = vec3(mouth);
   mouth = step(0.5, mouth);
   mask -= mouth;
-  vec3 col = vec3(1.0, 0.3686, 0.0) * mask;
+  vec3 col = vec3(0.5 + 0.5 * sin(iTime), pow(sin(iTime), 1.2), 0.0) * mask;
 
-  gl_FragColor = vec4(col, 1.0);
+  fragColor = vec4(col, 1.0);
 }
 
 // float circleHard(vec2 uv, vec2 p, float r) {
